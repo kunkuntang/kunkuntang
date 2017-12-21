@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tommi_Max Page</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" type="text/css" href="./font/iconfont.css">
+  <link href='http://fonts.font.im/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div class="nav-bg">
+
+  </div>
+  <div class="name-con">
+    <div class="per-con">
+      <div class="per-avatar">
+      </div>
+      <span class="per-name">Tommi_Max</span>
+      <h5>Less is More</h5>
+      <div class="tag-con">
+        <a href="https://github.com/kunkuntang" class="iconfont icon-github tag"></a>
+        <a href="https://kunkuntang.github.io" class="iconfont icon-blogo tag"></a>
+      </div>
+    </div>
+  </div>
+  <div class="per-introduce con-section">
+    <div class="title-con">
+      <span class="title">个人简介</span>
+    </div>
+    <div class="content">
+      我是Tommi，昵称糖米，现在是大四狗一枚。大一的时候加入了学校里唯一的互联网校级组织——<a href="http://xingkong.us">星空学生创新中心</a>，然后在师兄的带领下进入前端领域，然后渐渐地负责社团里部分产品的网站页面的开发与维护。本人的技术栈是html，css，javascript，node.js，mongoDB。有机会希望可以与大家多多交流学习😊。
+    </div>
+  </div>
+  <div class="pro-introduce con-section">
+    <div class="title-con">
+      <span class="title">作品展示</span>
+    </div>
+    <div class="pc-pro">
+      <% _.forEach(pcPro, function(pro) { %>
+        <a href="<%- pro.url %>">
+          <div class="pro-con">
+            <div class="pro-bg">
+              <div class="pro-img-con">
+                <img src="<%- pro.imgSrc %>" alt="<%- pro.title %>">
+              </div>
+              <span class="pro-info"><%- pro.title %></span>
+              <span class="pro-time"><%- pro.time %></span>
+            </div>
+          </div>
+        </a>
+        <% }); %>
+    </div>
+    <div class="moblie-pro">
+      <% _.forEach(mobPro, function(pro) { %>
+        <a href="<%- pro.title %>">
+          <div class="pro-con">
+            <div class="pro-bg">
+              <div class="pro-img-con">
+                <img src="<%- pro.imgSrc %>" alt="<%- pro.title %>">
+              </div>
+              <span class="pro-info"><%- pro.title %></span>
+              <span class="pro-time"><%- pro.time %></span>
+            </div>
+          </div>
+        </a>
+        <% }); %>
+    </div>
+  </div>
+  <div class="readed-books con-section">
+    <div class="title-con">
+      <span class="title">阅读书籍</span>
+    </div>
+    <div class="book-box" id="bookBox">
+      <% _.forEach(bookRow, function(row) { %>
+        <div class="book-row">
+          <% _.forEach(row, function(book) { %>
+            <div class="book-con">
+              <a href="<%- book.bUrl %>">
+                <div class="book-bg">
+                  <div class="book-img">
+                    <img src="<%- book.imgSrc %>" alt="<%- book.name %>">
+                  </div>
+                  <div class="book-name">
+                    <%- book.name %>
+                  </div>
+                  <span class="read-time">阅读时间：<%- book.rTime %></span>
+                </div>
+              </a>
+            </div>
+            <% }) %>
+        </div>
+        <% }) %>
+    </div>
+    <% if(bookRow.length >2) { %>
+      <div class="more-con" id="moreCon">
+        <div class="blur-con"></div>
+        <div id="showMoreBtn" class="show-more">展开更多</div>
+      </div>
+      <script>
+        document.getElementById('bookBox').style.height = '50rem';
+      </script>
+      <% } %>
+  </div>
+  <footer>
+    <div class="website-info">
+      <span>Copyright &#169; 2015-2017 Tommi_Max. All rights reserved.</span>
+      <span class="icp">粤ICP备16094784号</span>
+    </div>
+  </footer>
+  <!-- <script>
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('./sw.js').then(function(registration) {
+        console.log('service worker registe success!')
+      }).catch(function(err) {
+        console.log('service worker registe fail!!')
+      })
+    }
+  </script> -->
+  <script src="./js/index.js"></script>
+
+</body>
+
+</html>
