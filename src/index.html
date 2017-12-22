@@ -8,17 +8,24 @@
   <title>Tommi_Max Page</title>
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" type="text/css" href="./font/iconfont.css">
-  <link href='http://fonts.font.im/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.font.im/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-  <div class="nav-bg">
-
-  </div>
-  <div class="name-con">
+  <nav class="nav-list" id="navList">
+    <ul class="nav-con">
+      <a href="https://kunkuntang.github.io">
+        <li class="nav-item">个人博客</li>
+      </a>
+      <a href="https://github.com/kunkuntang">
+        <li class="nav-item">开源项目</li>
+      </a>
+    </ul>
+  </nav>
+  <div class="per-avatar" id="perAvatar"></div>
+  <div class="nav-bg"></div>
+  <div class="name-con con-section">
     <div class="per-con">
-      <div class="per-avatar">
-      </div>
       <span class="per-name">Tommi_Max</span>
       <h5>Less is More</h5>
       <div class="tag-con">
@@ -32,7 +39,7 @@
       <span class="title">个人简介</span>
     </div>
     <div class="content">
-      我是Tommi，昵称糖米，现在是大四狗一枚。大一的时候加入了学校里唯一的互联网校级组织——<a href="http://xingkong.us">星空学生创新中心</a>，然后在师兄的带领下进入前端领域，然后渐渐地负责社团里部分产品的网站页面的开发与维护。本人的技术栈是html，css，javascript，node.js，mongoDB。有机会希望可以与大家多多交流学习😊。
+      我是Tommi，昵称糖米，现在是大四狗一枚。大一的时候加入了学校里唯一的互联网校级组织——<a href="http://xingkong.us"><i>星空学生创新中心</i></a>，然后在师兄的带领下进入前端领域，然后渐渐地负责社团里部分产品的网站页面的开发与维护。本人的技术栈是html，css，javascript，node.js，mongoDB。有机会希望可以与大家多多交流学习😊。
     </div>
   </div>
   <div class="pro-introduce con-section">
@@ -111,7 +118,7 @@
       <span class="icp">粤ICP备16094784号</span>
     </div>
   </footer>
-  <!-- <script>
+  <script>
     if (navigator.serviceWorker) {
       navigator.serviceWorker.register('./sw.js').then(function(registration) {
         console.log('service worker registe success!')
@@ -119,9 +126,8 @@
         console.log('service worker registe fail!!')
       })
     }
-  </script> -->
+  </script>
   <script src="./js/index.js"></script>
-
 </body>
 
 </html>

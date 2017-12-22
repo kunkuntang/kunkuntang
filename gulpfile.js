@@ -1,6 +1,8 @@
 const gulp = require('gulp')
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
+const uglify = require('gulp-uglify')
+const pump = require('pump')
 const babel = require('gulp-babel')
 const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass')
@@ -29,22 +31,25 @@ gulp.task('build:css', () => {
 })
 
 gulp.task('build:js', () => {
-  gulp.src('src/**/*.js')
+  pump([gulp.src('src/**/*.js')
+    .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['env']
     }))
-    .pipe(gulp.dest('dist/'))
-    .pipe(reload({ stream: true }))
+    .pipe(uglify()),
+    sourcemaps.write('./'),
+    gulp.dest('dist/'),
+    reload({ stream: true })
+  ])
 })
 
 gulp.task('build:html', () => {
   gulp.src('src/*.html')
-    // .pipe(template({ users: ['jack', 'tommi'] }))
     .pipe(data(function(file) {
       return JSON.parse(fs.readFileSync('./src/' + path.basename(file.path) + '.json'));
     }))
     .pipe(template())
-    // .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('dist'))
     .pipe(reload({ stream: true }))
 })

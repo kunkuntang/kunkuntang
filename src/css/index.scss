@@ -13,6 +13,7 @@ li {
   border: 0;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 a {
@@ -21,14 +22,53 @@ a {
   outline: none;
 }
 
+.nav-list {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
+  overflow: hidden;
+  transition: all .3s ease;
+  .nav-con {
+    max-width: 970px;
+    margin: 0 auto;
+    .nav-item {
+      width: 8em;
+      height: 45px;
+      float: left;
+      font-size: 14px;
+      color: #ffffff;
+      text-align: center;
+      line-height: 45px;
+    }
+  }
+}
+
 .nav-bg {
   width: 100%;
   height: 30rem;
   background-color: peru;
-  position: relative;
   background: url('../img/nav-bg.jpg') center no-repeat;
   background-size: cover;
   background-attachment: fixed;
+}
+
+.per-avatar {
+  font-size: 62.5%;
+  font-size: 10px;
+  position: absolute;
+  top: 20em;
+  left: 50%;
+  margin-left: -11em;
+  border-radius: 50%;
+  height: 20em;
+  width: 20em;
+  background-color: red;
+  overflow: hidden;
+  background: url('https://avatars2.githubusercontent.com/u/13299413?s=460&v=4') center no-repeat;
+  background-size: contain;
+  transition: transform 0.3s ease;
 }
 
 .name-con {
@@ -36,21 +76,24 @@ a {
   font-size: 62.5%;
   height: 21rem;
   width: 100%;
-  position: relative;
-  bottom: 10rem;
   .per-con {
     margin-left: -2.5em;
+    padding-top: 13em;
     text-align: center;
   }
   .per-avatar {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    margin-left: -11em;
     border-radius: 50%;
     height: 20em;
     width: 20em;
     background-color: red;
-    margin: 0 auto 2em;
     overflow: hidden;
     background: url('https://avatars2.githubusercontent.com/u/13299413?s=460&v=4') center no-repeat;
     background-size: contain;
+    transition: transform 0.3s ease;
   }
   .per-name {
     font-size: 26px;
@@ -81,17 +124,25 @@ a {
   }
 }
 
-.con-section {
-  margin-bottom: 2rem;
+.per-introduce {
+  &:hover {
+    .title-con .title {
+      padding-right: 1em;
+    }
+  }
 }
 
-.per-introduce {
+.con-section {
+  margin-bottom: 2rem;
   font-size: 10px;
   font-size: 62.5%;
   width: 100%;
   max-width: 970px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.per-introduce {
   .content {
     font-size: 16px;
     text-indent: 2em;
@@ -99,12 +150,6 @@ a {
 }
 
 .pro-introduce {
-  font-size: 10px;
-  font-size: 62.5%;
-  width: 100%;
-  max-width: 970px;
-  margin-left: auto;
-  margin-right: auto;
   overflow: hidden;
   a:focus {
     .pro-bg {
@@ -173,11 +218,6 @@ a {
 }
 
 .readed-books {
-  font-size: 10px;
-  font-size: 62.5%;
-  width: 970px;
-  margin-left: auto;
-  margin-right: auto;
   position: relative;
   &:hover {
     .title-con .title {
