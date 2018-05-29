@@ -52,7 +52,8 @@
       "rTime": "2016-11-20",
       "bUrl": "https://book.douban.com/subject/26382780/",
       "imgSrc": "https://img3.doubanio.com/lpic/s28065006.jpg"
-    }, {
+    }],
+    [{
       "name": "高性能响应式Web开发实战",
       "rTime": "2016-03-12",
       "bUrl": "https://book.douban.com/subject/27106846/",
@@ -62,8 +63,7 @@
       "rTime": "2015-09-11",
       "bUrl": "https://book.douban.com/subject/19987179/",
       "imgSrc": "https://img3.doubanio.com/lpic/s25102951.jpg"
-    }],
-    [{
+    }, {
       "name": "你不知道的JavaScript（上卷）",
       "rTime": "2016-05-05",
       "bUrl": "https://book.douban.com/subject/26351021/",

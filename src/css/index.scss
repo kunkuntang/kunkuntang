@@ -30,6 +30,7 @@ a {
   background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%);
   overflow: hidden;
   transition: all .3s ease;
+  z-index: 999;
   .nav-con {
     max-width: 970px;
     margin: 0 auto;
@@ -69,6 +70,7 @@ a {
   background: url('https://avatars2.githubusercontent.com/u/13299413?s=460&v=4') center no-repeat;
   background-size: contain;
   transition: transform 0.3s ease;
+  z-index: 9999;
 }
 
 .name-con {
