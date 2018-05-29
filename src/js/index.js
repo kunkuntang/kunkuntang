@@ -23,7 +23,7 @@ window.onload = function() {
 }
 
 function changeNav() {
-  if (window.scrollY < 250 && window.scrollY >= 0) {
+  if (window.scrollY < 250 && window.scrollY >= -100) {
     navList.style.cssText = '';
   } else {
     navList.style.background = '#000000';
@@ -31,7 +31,7 @@ function changeNav() {
 }
 
 function changeAvatar() {
-  if (window.scrollY < 250 && window.scrollY >= 0) {
+  if (window.scrollY < 250 && window.scrollY >= -100) {
     let initScale = 1 - parseFloat(window.scrollY / 400).toFixed(1)
     initScale = initScale < 0.3 ? 0.3 : initScale
     perAvatar.style.cssText = 'position: absolute; top: 20em; transform: scale(' + initScale + ')';

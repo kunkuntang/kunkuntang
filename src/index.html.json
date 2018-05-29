@@ -12,7 +12,7 @@
   }, {
     "title": "星名片宣传页",
     "time": "2015-10-19",
-    "url": "http://www.xingkong.us/starcard/",
+    "url": "https://lenkuntang.cn/starcard/",
     "imgSrc": "./img/xcpostPc.jpg"
   }],
   "mobPro": [{
@@ -23,11 +23,21 @@
   }, {
     "title": "星名片宣传页",
     "time": "2015-10-19",
-    "url": "http://www.xingkong.us/starcard/",
+    "url": "http://lenkuntang.cn/starcard/appindex.html",
     "imgSrc": "./img/xcpost.jpg"
   }],
   "bookRow": [
     [{
+      "name": "Web全栈工程师的自我修养",
+      "rTime": "2018-03-01",
+      "bUrl": "https://book.douban.com/subject/s28281864/",
+      "imgSrc": "https://img3.doubanio.com/lpic/s28281864.jpg"
+    }, {
+      "name": "深入浅出Webpack",
+      "rTime": "2016-05-27",
+      "bUrl": "https://book.douban.com/subject/27605367/",
+      "imgSrc": "https://img3.doubanio.com/lpic/s29640359.jpg"
+    }, {
       "name": "响应式Web设计",
       "rTime": "2017-11-01",
       "bUrl": "https://book.douban.com/subject/s24423104/",
