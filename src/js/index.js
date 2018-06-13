@@ -1,4 +1,6 @@
 window.onload = function() {
+  const isMobile = checkDevice()
+  console.log(isMobile)
   const showMoreBtn = getElById('showMoreBtn')
   const bookBox = getElById('bookBox')
   const moreCon = getElById('moreCon')
@@ -17,7 +19,7 @@ window.onload = function() {
   }
 
   addEvent(window, 'scroll', (e) => {
-    changeAvatar()
+    changeAvatar(isMobile)
     changeNav()
   })
 }
@@ -30,14 +32,22 @@ function changeNav() {
   }
 }
 
-function changeAvatar() {
-  if (window.scrollY < 250 && window.scrollY >= -100) {
-    let initScale = 1 - parseFloat(window.scrollY / 400).toFixed(1)
-    initScale = initScale < 0.3 ? 0.3 : initScale
-    perAvatar.style.cssText = 'position: absolute; top: 20em; transform: scale(' + initScale + ')';
+function changeAvatar(isMobile) {
+  if (isMobile) {
+    if (window.scrollY < 250 && window.scrollY >= -100) {
+      let initScale = 1 - parseFloat(window.scrollY / 400).toFixed(1)
+      initScale = initScale < 0.7 ? 0.7 : initScale
+      perAvatar.style.cssText = 'position: absolute; top: 25em; transform: scale(' + initScale + ')';
+    }
   } else {
-    perAvatar.style.cssText = 'position: fixed; top: -55px ; transform: scale(0.3); left: 50%; margin-left: -11em;';
+    if (window.scrollY < 250 && window.scrollY >= -100) {
+      let initScale = 1 - parseFloat(window.scrollY / 400).toFixed(1)
+      initScale = initScale < 0.3 ? 0.3 : initScale
+      perAvatar.style.cssText = 'position: absolute; top: 20em; transform: scale(' + initScale + ')';
+    } else {
+      perAvatar.style.cssText = 'position: fixed; top: -55px ; transform: scale(0.3); left: 50%; margin-left: -11em;';
 
+    }
   }
 }
 
@@ -76,3 +86,25 @@ const removeEvent = (function() {
     }
   }
 })();
+
+function checkDevice() {
+  let mobile_flag = false;
+  if (window.navigator) {
+    const mobileAgents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+    const userAgent = window.navigator.userAgent
+    for (let v = 0; v < mobileAgents.length; v++) {
+      if (userAgent.indexOf(mobileAgents[v]) > 0) {
+        mobile_flag = true;
+        break;
+      }
+    }
+  }
+  let screen_width = window.screen.width;
+  let screen_height = window.screen.height;
+
+  //根据屏幕分辨率判断是否是手机
+  if (screen_width < 768 && screen_height < 800) {
+    mobile_flag = true;
+  }
+  return mobile_flag;
+}
