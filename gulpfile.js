@@ -1,4 +1,4 @@
-const gulp = require('gulp')
+const { watch, src, dest, series, parallel } = require('gulp');
 const htmlmin = require('gulp-htmlmin')
 const imagemin = require('gulp-imagemin')
 const uglify = require('gulp-uglify')
@@ -17,8 +17,8 @@ const reload = browserSync.reload
 const fs = require('fs')
 const path = require('path')
 
-gulp.task('build:css', () => {
-  gulp.src('./src/css/**/*.scss')
+function buildCss(cb) {
+  src('./src/css/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(autoprefixer({
@@ -26,75 +26,88 @@ gulp.task('build:css', () => {
       cascade: false
     }))
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/css'))
+    .pipe(dest('dist/css'))
     .pipe(reload({ stream: true }))
-})
+  cb();
+}
 
-gulp.task('build:js', () => {
-  pump([gulp.src('src/**/*.js')
+function buildJs(cb) {
+  pump([src('src/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['env']
     }))
     .pipe(uglify()),
     sourcemaps.write('./'),
-    gulp.dest('dist/'),
+    dest('dist/'),
     reload({ stream: true })
   ])
-})
+  cb();
+}
 
-gulp.task('build:html', () => {
-  gulp.src('src/*.html')
+function buildHtml(cb) {
+  src('src/*.html')
     .pipe(data(function(file) {
       return JSON.parse(fs.readFileSync('./src/' + path.basename(file.path) + '.json'));
     }))
     .pipe(template())
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest('dist'))
+    .pipe(dest('dist'))
     .pipe(reload({ stream: true }))
-})
+  cb();
+}
 
-gulp.task('build:font', () => {
-  gulp.src('src/font/**/*')
-    .pipe(gulp.dest('dist/font'))
-})
+function buildFont(cb) {
+  src('src/font/**/*')
+    .pipe(dest('dist/font'))
+  cb();
+}
 
-gulp.task('build:image', () => {
-  gulp.src('src/img/*')
+function buildImage(cb) {
+  src('src/img/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('dist/img'))
-})
+    .pipe(dest('dist/img'))
+  cb();
+}
 
-gulp.task('build:clean', () => {
-  return gulp.src('dist', { read: false })
+function buildClean(cb) {
+  return src('dist', { read: false, allowEmpty: true })
     .pipe(clean());
-})
+  cb();
+}
 
-gulp.task('build', gulpSequence(['build:css', 'build:html', 'build:js', 'build:image', 'build:font']))
 
-gulp.task('default', gulpSequence('build:clean', 'build'))
-
-gulp.task('watch', ['default'], () => {
-  gulp.watch('./src/js/**/*.js', ['build:js']).on('change', function(event) {
+function watchTask(cb) {
+  watch('./src/js/**/*.js', ['build:js']).on('change', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });
-  gulp.watch('./src/css/**/*.scss', ['build:css']).on('change', function(event) {
+  watch('./src/css/**/*.scss', ['build:css']).on('change', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });
-  gulp.watch('./src/**/*.html', ['build:html']).on('change', function(event) {
+  watch('./src/**/*.html', ['build:html']).on('change', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });
-})
+  cb();
+}
 
 // 监视文件改动并重新载入
-gulp.task('server', ['default'], function() {
+function serverTask() {
   browserSync({
     server: {
       baseDir: 'dist'
     }
   });
 
-  gulp.watch('./src/*.html', ['build:html'])
-  gulp.watch(['./src/css/**/*.css', './src/css/**/*.scss'], ['build:css'])
-  gulp.watch('./src/**/*.js', ['build:js'])
-});
+  watch('./src/*.html', buildHtml)
+  watch(['./src/css/**/*.css', './src/css/**/*.scss'], buildCss)
+  watch('./src/**/*.js', buildClean)
+}
+
+const buildTask = parallel(buildCss, buildHtml, buildJs, buildImage, buildFont);
+const defaultTask = series(buildClean, buildTask);
+
+exports.build = series(buildTask);
+exports.clean = series(buildClean);
+exports.watch = series(parallel(buildTask), watchTask);
+exports.server = series(defaultTask, serverTask);
+exports.default = defaultTask;

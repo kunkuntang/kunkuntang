@@ -22,7 +22,8 @@
   "homepage": "https://github.com/kunkuntang/kunkuntang#readme",
   "description": "",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "global": "^4.4.0",
+    "gulp": "^4.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

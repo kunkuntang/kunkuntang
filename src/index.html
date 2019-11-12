@@ -55,7 +55,7 @@
   </div>
   <div class="pro-introduce con-section">
     <div class="title-con">
-      <span class="title">作品展示</span>
+      <span class="title">作品分享</span>
     </div>
     <div class="pc-pro">
       <% _.forEach(pcPro, function(pro) { %>
@@ -74,7 +74,7 @@
     </div>
     <div class="moblie-pro">
       <% _.forEach(mobPro, function(pro) { %>
-        <a href="<%- pro.title %>">
+        <a href="<%- pro.url %>">
           <div class="pro-con">
             <div class="pro-bg">
               <div class="pro-img-con">
@@ -90,7 +90,7 @@
   </div>
   <div class="readed-books con-section">
     <div class="title-con">
-      <span class="title">阅读书籍</span>
+      <span class="title">阅读书籍推荐</span>
     </div>
     <div class="book-box" id="bookBox">
       <% _.forEach(bookRow, function(row) { %>
@@ -125,8 +125,13 @@
   </div>
   <footer>
     <div class="website-info">
-      <span>Copyright &#169; 2015-2017 Tommi_Max. All rights reserved.</span>
-      <span class="icp">粤ICP备16094784号</span>
+      <!-- <span class="friendly-link">友情链接</span>
+      <div class="friendly-link-con">
+        <a href="https://xingkong.gqt.gcu.edu.cn/"><img style="width: 100px;" src="./img/xingkong.png" alt="organization"></a>
+        <a href="https://www.hoolinks.com/"><img style="width: 100px;" src="./img/hoolinks.png" alt="organization"></a>
+      </div> -->
+      <span>Copyright &#169; 2015-2018 &nbsp;&nbsp; Tommi_Max. &nbsp;&nbsp; All rights reserved</span>
+      <a href="http://www.beian.miit.gov.cn"><span class="icp">粤ICP备16094784号</span></a>
     </div>
   </footer>
   <script>
