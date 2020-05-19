@@ -11,6 +11,10 @@ const sourcemaps = require('gulp-sourcemaps')
 const data = require('gulp-data')
 const template = require('gulp-template')
 const gulpSequence = require('gulp-sequence')
+const preprocess = require("gulp-preprocess");
+const rev = require('gulp-rev');
+const revCollector = require('gulp-rev-collector');
+const override = require('gulp-rev-css-url');
 const browserSync = require('browser-sync')
 const reload = browserSync.reload
 
@@ -26,13 +30,18 @@ function buildCss(cb) {
       cascade: false
     }))
     .pipe(sourcemaps.write('./'))
+    .pipe(rev())
+    // .pipe(override())
     .pipe(dest('dist/css'))
+    .pipe(rev.manifest())
+    .pipe(dest('rev/css'))
     .pipe(reload({ stream: true }))
   cb();
 }
 
 function buildJs(cb) {
-  pump([src('src/**/*.js')
+  pump([src(['src/sw.js', 'src/sw-register.js'])
+    .pipe(preprocess({ context: { NODE_ENV: process.env.NODE_ENV || 'development' } }))
     .pipe(sourcemaps.init())
     .pipe(babel({
       presets: ['env']
@@ -40,17 +49,38 @@ function buildJs(cb) {
     .pipe(uglify()),
     sourcemaps.write('./'),
     dest('dist/'),
+    src(['src/js/*.js'])
+    .pipe(sourcemaps.init())
+    .pipe(babel({
+      presets: ['env']
+    }))
+    .pipe(uglify()),
+    sourcemaps.write('./'),
+    dest('dist/js'),
     reload({ stream: true })
   ])
   cb();
 }
 
 function buildHtml(cb) {
-  src('src/*.html')
+  src(['rev/**/*.json','src/*.html'])
     .pipe(data(function(file) {
-      return JSON.parse(fs.readFileSync('./src/' + path.basename(file.path) + '.json'));
+      const filePath = './src/' + path.basename(file.path) + '.json'
+      if(fs.existsSync(filePath)) {
+        return JSON.parse(fs.readFileSync(filePath));
+      } else {
+        return {}
+      }
     }))
     .pipe(template())
+    .pipe(revCollector({
+      replaceReved: true,
+      dirReplacements: {
+        './css': './css',
+        // './js': '/dist/js',
+        './plugins': './plugins',
+      }
+    }))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(dest('dist'))
     .pipe(reload({ stream: true }))
@@ -70,6 +100,15 @@ function buildImage(cb) {
   cb();
 }
 
+function movePlugins(cb) {
+  src('src/plugins/**/*')
+    .pipe(rev())
+    .pipe(dest('dist/plugins'))
+    .pipe(rev.manifest())
+    .pipe(dest('rev/plugins'))
+  cb()
+}
+
 function buildClean(cb) {
   return src('dist', { read: false, allowEmpty: true })
     .pipe(clean());
@@ -78,7 +117,7 @@ function buildClean(cb) {
 
 
 function watchTask(cb) {
-  watch('./src/js/**/*.js', ['build:js']).on('change', function(event) {
+  watch('./src/js/**/*.js', ['build:js', 'move:plugins']).on('change', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
   });
   watch('./src/css/**/*.scss', ['build:css']).on('change', function(event) {
@@ -100,10 +139,10 @@ function serverTask() {
 
   watch('./src/*.html', buildHtml)
   watch(['./src/css/**/*.css', './src/css/**/*.scss'], buildCss)
-  watch('./src/**/*.js', buildClean)
+  watch('./src/**/*.js', buildJs, movePlugins)
 }
 
-const buildTask = parallel(buildCss, buildHtml, buildJs, buildImage, buildFont);
+const buildTask = parallel(buildCss, series(buildHtml), buildJs, buildImage, buildFont, movePlugins);
 const defaultTask = series(buildClean, buildTask);
 
 exports.build = series(buildTask);

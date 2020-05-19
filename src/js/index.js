@@ -1,6 +1,6 @@
 window.onload = function() {
   const isMobile = checkDevice()
-  console.log(isMobile)
+  console.log('isMobile', isMobile)
   const showMoreBtn = getElById('showMoreBtn')
   const bookBox = getElById('bookBox')
   const moreCon = getElById('moreCon')
@@ -40,13 +40,21 @@ function changeAvatar(isMobile) {
       perAvatar.style.cssText = 'position: absolute; top: 25em; transform: scale(' + initScale + ')';
     }
   } else {
+    let winWidth = window.document.body.clientWidth
     if (window.scrollY < 250 && window.scrollY >= -100) {
       let initScale = 1 - parseFloat(window.scrollY / 400).toFixed(1)
       initScale = initScale < 0.3 ? 0.3 : initScale
-      perAvatar.style.cssText = 'position: absolute; top: 20em; transform: scale(' + initScale + ')';
-    } else {
-      perAvatar.style.cssText = 'position: fixed; top: -55px ; transform: scale(0.3); left: 50%; margin-left: -11em;';
-
+      if (winWidth > 768) {
+        perAvatar.style.cssText = 'position: absolute; top: 16em; transform: scale(' + initScale + ')';
+      } else {
+        perAvatar.style.cssText = 'position: absolute; top: 20em; transform: scale(' + initScale + ')';
+      }
+      } else {
+      if (winWidth > 768) {
+        perAvatar.style.cssText = 'position: fixed; top: -120px ; transform: scale(0.3); left: 50%; margin-left: -11em;';
+      } else {
+        perAvatar.style.cssText = 'position: fixed; top: -35px ; transform: scale(0.3); left: 50%;';
+      }
     }
   }
 }

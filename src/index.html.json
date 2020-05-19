@@ -2,28 +2,28 @@
   "pcPro": [{
     "title": "2015毕业季专题页",
     "time": "2017-04-24",
-    "url": "https://lenkuntang.cn/BYJ2015/",
-    "imgSrc": "./img/BYJ21015.jpg"
+    "url": "/project/BYJ2015/",
+    "imgSrc": "./img/BYJ2015.jpg"
   }, {
     "title": "2016毕业季专题页",
     "time": "2016-05-10",
-    "url": "https://lenkuntang.cn/BYJ2016/",
-    "imgSrc": "./img/BYJ21016.jpg"
+    "url": "/project/BYJ2016/",
+    "imgSrc": "./img/BYJ2016.jpg"
   }, {
     "title": "星名片宣传页",
     "time": "2015-10-19",
-    "url": "https://lenkuntang.cn/starcard/",
+    "url": "/project/starcard/",
     "imgSrc": "./img/xcpostPc.jpg"
   }],
   "mobPro": [{
     "title": "星名片3",
     "time": "2017-12-10",
-    "url": "https://lenkuntang.cn/xingcard/",
+    "url": "/project/xingcard/",
     "imgSrc": "./img/xc3.jpg"
   }, {
     "title": "星名片宣传页",
     "time": "2015-10-19",
-    "url": "http://lenkuntang.cn/starcard/appindex.html",
+    "url": "/project/starcard/appindex.html",
     "imgSrc": "./img/xcpost.jpg"
   }],
   "bookRow": [

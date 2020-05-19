@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tommi_Max Page</title>
   <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" type="text/css" href="./font/iconfont.css">
+  <link rel="stylesheet" href="./plugins/toast/toast.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./font/iconfont.css"> -->
   <!-- <link href='https://fonts.font.im/css?family=Open+Sans' rel='stylesheet' type='text/css'> -->
   <style>
     @font-face {
@@ -50,7 +51,13 @@
       <span class="title">个人简介</span>
     </div>
     <div class="content">
-      我是Tommi，昵称糖米，现在是大四狗一枚。大一的时候加入了学校里唯一的互联网校级组织——<a href="http://xingkong.gqt.gcu.edu.cn/"><i>星空学生创新中心</i></a>，然后在师兄的带领下进入前端领域，然后渐渐地负责社团里部分产品的网站页面的开发与维护。本人的技术栈是html，css，javascript，node.js，mongoDB。玩过webpack，grunt，gulp，目前正在研究TypeScript，单元测试，SSR，有机会希望可以与大家多多交流学习😊。
+      我是CubeSuger方糖，是一名前端开发工程师。我在大一的时候进入了学校里专门搞技术的社团——<a href="http://xingkong.gqt.gcu.edu.cn/"><i>星空学生创新中心</i></a>，然后在师兄的带领下进入前端领域，并负责社团里部分产品的网站页面的开发与维护。从大学那时候刚开始学习前端到现在已经有6个年头，对前端和后端都有一定的了解。
+    </div>
+    <div class="content">
+      前端方面我熟悉三大基础（HTML，CSS，Javascript），框架上使用过Vue和React，对Es6和Typescript有一定的了解。学习、了解、使用过的技术有，TypeScript，Node.js，MongoDB，Java等，写过Vue.js和React。玩过webpack，grunt，gulp，目前正在研究TypeScript，单元测试，SSR，有机会希望可以与大家多多交流学习😊。
+    </div>
+    <div class="content">
+      后端方面了解过Node.js和Java，使用过Express、Koa、Think.js和Egg.js，数据库没有涉及太深，只会简单的CURD，使用过MongoDB、MySQL。
     </div>
   </div>
   <div class="pro-introduce con-section">
@@ -113,6 +120,7 @@
         </div>
         <% }) %>
     </div>
+  
     <% if(bookRow.length >2) { %>
       <div class="more-con" id="moreCon">
         <div class="blur-con"></div>
@@ -135,15 +143,39 @@
     </div>
   </footer>
   <script>
-    if (navigator.serviceWorker) {
-      navigator.serviceWorker.register('./sw.js').then(function(registration) {
-        console.log('service worker registe success!')
-      }).catch(function(err) {
-        console.log('service worker registe fail!!')
-      })
-    }
+    // 是否使用 service worker
+    window.SW_FALLBACK = false;
+
+    window.addEventListener('load', function() {
+      var script = document.createElement('script');
+      var firstScript = document.getElementsByTagName('script')[0];
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = '/sw-register.js?v=' + Date.now();
+      firstScript.parentNode.insertBefore(script, firstScript);
+      firstScript.onload = function() {
+        if (navigator.serviceWorker && window.SW_FALLBACK) {
+          // getRegistration 的参数为 sw 的 scope 的值
+          navigator.serviceWorker.getRegistration('/').then(function(reg) {
+            reg && reg.unregister();
+            // 清理留下来的 cache 缓存
+            window.caches && caches.keys && caches.keys().then(function(keys) {
+              keys.forEach(function(key) {
+                caches.delete(key);
+              });
+            });
+          })
+        }
+      }
+    })
   </script>
   <script src="./js/index.js"></script>
+  <script src="./plugins/toast/toast.js"></script>
+  <!-- <script>
+    window.addEventListener('load', function() {
+      var csTip = new CSugerTips()
+    })
+  </script> -->
 </body>
 
 </html>

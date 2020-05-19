@@ -59,15 +59,15 @@
     font-size: 62.5%;
     font-size: 10px;
     position: absolute;
-    top: 20em;
+    top: 16em;
     left: 50%;
     margin-left: -11em;
     border-radius: 50%;
-    height: 20em;
-    width: 20em;
+    height: 15em;
+    width: 15em;
     background-color: red;
     overflow: hidden;
-    background: url('https://avatars2.githubusercontent.com/u/13299413?s=460&v=4') center no-repeat;
+    background: url('/img/avator.jfif') center no-repeat;
     background-size: contain;
     transition: transform 0.3s ease;
     z-index: 9999;
@@ -80,12 +80,12 @@
     width: 100%;
     .per-con {
       margin-left: -2.5em;
-      padding-top: 13em;
+      padding-top: 18em;
       text-align: center;
     }
     .per-avatar {
       position: absolute;
-      top: 20em;
+      top: 16em;
       left: 50%;
       margin-left: -11em;
       border-radius: 50%;
@@ -93,9 +93,10 @@
       width: 20em;
       background-color: red;
       overflow: hidden;
-      background: url('https://avatars2.githubusercontent.com/u/13299413?s=460&v=4') center no-repeat;
+      background: url('/img/avator.jfif') center no-repeat;
       background-size: contain;
       transition: transform 0.3s ease;
+      transform-origin: center 20em;
     }
     .per-name {
       font-size: 26px;
@@ -352,12 +353,14 @@
   @media screen and (min-width: 320px) and (max-width: 768px) {
     .name-con {
       .per-avatar {
-        top: 25em;
+        top: 20em;
         height: 15em;
         width: 15em;
         margin-left: -8em;
-        z-index: 1;
-        transform-origin: center 20em;
+        transform-origin: center 8em;
+      }
+      .per-con {
+        padding-top: 13em;
       }
     }
     .con-section {
