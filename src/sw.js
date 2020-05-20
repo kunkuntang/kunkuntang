@@ -1,5 +1,5 @@
 
-var CACHE_VERSION = 1;
+var CACHE_VERSION = 0;
 var CACHE_NAME = 'cache-v' + CACHE_VERSION;
 var CACHE_URLS = [
   '/',
