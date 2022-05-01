@@ -1,53 +1,22 @@
 {
-  "name": "lenkuntang",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "kuntang",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development gulp server",
-    "build": "cross-env NODE_ENV=production gulp buildProd",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kunkuntang/kunkuntang.git"
-  },
-  "keywords": [
-    "kuntang",
-    "index",
-    "page"
-  ],
-  "author": "kuntang",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kunkuntang/kunkuntang/issues"
-  },
-  "homepage": "https://github.com/kunkuntang/kunkuntang#readme",
-  "description": "",
-  "dependencies": {
-    "global": "^4.4.0",
-    "gulp": "^4.0.2",
-    "gulp-rev": "^9.0.0",
-    "gulp-rev-collector": "^1.3.1",
-    "gulp-rev-css-url": "^0.1.0",
-    "require-dir": "^1.2.0"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.19.0",
-    "cross-env": "^7.0.2",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-data": "^1.2.1",
-    "gulp-htmlmin": "^4.0.0",
-    "gulp-imagemin": "^4.0.0",
-    "gulp-preprocess": "^3.0.3",
-    "gulp-sass": "^4.0.1",
-    "gulp-sequence": "^1.0.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-template": "^5.0.0",
-    "gulp-uglify": "^3.0.0",
-    "pump": "^3.0.0"
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "@tsconfig/svelte": "^2.0.1",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.2.7",
+    "svelte-preprocess": "^4.9.8",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.5"
   }
 }
