@@ -1,41 +1,21 @@
 <script lang="ts">
-  import { fly } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
   import { CarouselScrollTop } from "../Carousel/CarouselScrollTopStore";
 
-  export let scrollTop = 0;
-  // let show = true
-
-  // if (scrollTop >= 100) {
-  //   show = false
-  // }
   let opacity = 1;
 
-  // const opacity = fly(1);
-
-  // if (scrollTop > 200) {
-  //   opacity.set(0);
-  // } else if (!scrollTop) {
-  //   opacity.set(1);
-  // } else {
-  //   opacity.set(scrollTop * 0.005);
-  // }
-
   $: {
-    console.log("scrollTop", scrollTop);
-    if ($CarouselScrollTop > 200) {
+    if ($CarouselScrollTop >= 400) {
       opacity = 0;
     } else if (!$CarouselScrollTop) {
       opacity = 1;
     } else {
-      opacity = (200 - $CarouselScrollTop * 0.05);
+      opacity = 1 - Number(($CarouselScrollTop / 400).toFixed(2));
     }
   }
 </script>
 
-<div class="motto">
-  <div style="opacity: {opacity};">Less is More...</div>
-  {$CarouselScrollTop}
+<div class="motto" style="opacity: {opacity};">
+  <div>Less is More...</div>
 </div>
 
 <style>
@@ -49,5 +29,7 @@
     color: #fff;
     font-style: italic;
     font-size: 92px;
+    opacity: 1;
+    transition: all 0.5s ease-out;
   }
 </style>

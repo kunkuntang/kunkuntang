@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
   import { CarouselScrollTop } from "./CarouselScrollTopStore";
 
   function throttle(cb: Function, time = 200) {
@@ -13,9 +12,8 @@
       }
     };
   }
-  const onCarouselScroll = throttle(function (node: WheelEvent) {
-    console.log("node", (node.target as HTMLElement).scrollTop);
-    const scrollTop = (node.target as HTMLElement).scrollTop;
+  const onCarouselScroll = throttle(function (event: WheelEvent) {
+    const scrollTop = (event.target as HTMLElement).scrollTop;
     CarouselScrollTop.set(scrollTop);
   });
 </script>
@@ -32,7 +30,7 @@
   .carousel-container {
     width: 100%;
     height: 100vh;
-    background: url("../../assets/bg1.jpg") center no-repeat;
+    background: url("../../assets/bg2.jpg") center no-repeat;
     background-size: cover;
     background-attachment: fixed;
     z-index: -1;

@@ -8,7 +8,7 @@
     background: url('../../assets/avatar.jpg') center no-repeat;
     background-size: contain;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 30px;
   }
 </style>
