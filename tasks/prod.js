@@ -1,12 +1,12 @@
 const { src, dest } = require('gulp');
 
 const htmlmin = require('gulp-htmlmin')
-const imagemin = require('gulp-imagemin')
+// const imagemin = require('gulp-imagemin')
 const uglify = require('gulp-uglify')
 const pump = require('pump')
 const babel = require('gulp-babel')
 const autoprefixer = require('gulp-autoprefixer');
-const sass = require('gulp-sass')
+const sass = require('gulp-sass')(require('sass'))
 const sourcemaps = require('gulp-sourcemaps')
 const data = require('gulp-data')
 const template = require('gulp-template')
@@ -39,7 +39,7 @@ function cleanRevCss() {
 }
 
 function buildProdCss(cb) {
-  console.log('buildProdCss')
+  // console.log('buildProdCss')
   src('./src/css/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
@@ -119,7 +119,7 @@ function buildProdFont(cb) {
 
 function buildProdImage(cb) {
   src('src/img/*')
-    .pipe(imagemin())
+    // .pipe(imagemin())
     .pipe(rev())
     .pipe(dest('dist/img'))
     .pipe(rev.manifest())

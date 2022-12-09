@@ -31,7 +31,14 @@ function serverTask() {
 
 
 const buildDevTask = parallel(buildDevCss, buildDevHtml, buildDevJs, buildDevImage, buildDevFont, moveDevPlugins);
-const buildProdTask = parallel(buildProdCss, buildProdHtml, buildProdJs, buildProdImage, buildProdFont, moveProdPlugins);
+const buildProdTask = parallel(
+  buildProdCss,
+  buildProdHtml,
+  buildProdJs,
+  buildProdImage,
+  buildProdFont,
+  moveProdPlugins
+);
 
 exports.buildDev = series(buildClean, buildDevTask);
 exports.buildProd = series(buildClean, buildProdTask);
